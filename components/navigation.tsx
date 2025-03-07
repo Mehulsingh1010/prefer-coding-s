@@ -135,11 +135,12 @@ export function Navigation() {
                     <div className="text-sm font-medium text-gray-500 mb-2">Services</div>
                     {services.map((service) => (
                       <Link
-                        key={service.title}
-                        href="#"
-                        className="flex items-start gap-2 py-2 hover:text-blue-600"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
+                      key={service.title}
+                      href={`/services/${service.title.toLowerCase().replace(/\s+/g, "-")}`}
+                      className="flex items-start gap-2 py-2 hover:text-blue-600"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                    
                         <service.icon className="h-5 w-5 text-blue-500 mt-0.5" />
                         <div>
                           <div className="font-medium">{service.title}</div>
