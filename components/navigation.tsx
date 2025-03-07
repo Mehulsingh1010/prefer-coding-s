@@ -1,5 +1,7 @@
 "use client"
-import Link from "next/link"
+import { useState } from "react";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -7,8 +9,8 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"
-import { Button } from "@/components/ui/button"
+} from "@/components/ui/navigation-menu";
+import { Button } from "@/components/ui/button";
 
 const courses = [
   {
@@ -23,9 +25,11 @@ const courses = [
     title: "HR Management",
     description: "Learn modern HR practices and strategies",
   },
-]
+];
 
 export function Navigation() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/70 shadow-md">
       <div className="container mx-auto flex h-16 items-center px-6 lg:px-8">
@@ -33,6 +37,7 @@ export function Navigation() {
           PreferCoding
         </Link>
 
+        {/* Desktop Navigation */}
         <nav className="ml-auto hidden md:flex items-center space-x-6">
           <NavigationMenu>
             <NavigationMenuList className="flex items-center space-x-4">
@@ -70,15 +75,44 @@ export function Navigation() {
           </NavigationMenu>
         </nav>
 
-        <div className="ml-auto md:ml-6 flex items-center space-x-4">
-          <Button variant="ghost" asChild>
-            <Link href="/sign-in">Sign In</Link>
-          </Button>
-          <Button className="px-6 py-2 text-lg" asChild>
-            <Link href="/get-started">Get Started</Link>
-          </Button>
-        </div>
+        {/* Mobile Menu Button */}
+        <button
+          className="ml-auto md:hidden p-2"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="absolute top-16 left-0 w-full bg-white shadow-md md:hidden">
+            <nav className="flex flex-col items-center space-y-4 py-4">
+              <Link href="/" className="text-lg font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>
+                Home
+              </Link>
+              <Link href="/about" className="text-lg font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>
+                About Us
+              </Link>
+              <Link href="/contact" className="text-lg font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>
+                Contact
+              </Link>
+              <div className="w-full border-t pt-4">
+                <Button variant="ghost" asChild>
+                  <Link href="/sign-in" onClick={() => setIsMobileMenuOpen(false)}>
+                    Sign In
+                  </Link>
+                </Button>
+                <Button className="px-6 py-2 text-lg" asChild>
+                  <Link href="/get-started" onClick={() => setIsMobileMenuOpen(false)}>
+                    Get Started
+                  </Link>
+                </Button>
+              </div>
+            </nav>
+          </div>
+        )}
       </div>
     </header>
-  )
+  );
 }
