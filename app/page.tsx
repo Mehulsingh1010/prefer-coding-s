@@ -10,10 +10,10 @@ import { Navigation } from "@/components/navigation"
 
 export default function Home() {
   return (
-    <div className="flex flex-col mt-10 pb-24">
+    <div className="flex flex-col  pb-24">
        <section className="w-full min-h-screen bg-gradient-to-br from-white to-blue-50/50 relative overflow-hidden">
       {/* Navigation */}
-      <Navigation />
+
 
       {/* Blue blur effect */}
       <div className="absolute right-0 top-1/4 w-[800px] h-[800px] bg-blue-100/50 rounded-full blur-3xl -z-10" />

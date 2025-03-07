@@ -85,7 +85,8 @@ export function Navigation() {
                   {services.map((service) => (
                     <Link
                       key={service.title}
-                      href="#"
+                      href="/services/[slug]"
+                      as={`/services/${service.title.toLowerCase().replace(" ", "-")}`}
                       className="flex items-start gap-3 p-3 rounded-lg hover:bg-blue-50 transition-colors"
                       onClick={() => setIsServicesOpen(false)}
                     >
