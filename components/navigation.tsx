@@ -1,118 +1,175 @@
 "use client"
-import { useState } from "react";
-import Link from "next/link";
-import { Menu, X } from "lucide-react";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
-import { Button } from "@/components/ui/button";
 
-const courses = [
+import { useState, useEffect } from "react"
+import Link from "next/link"
+import { Menu, Code, Brain, Home } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+
+const services = [
   {
-    title: "Web Development",
-    description: "Full stack development with modern technologies",
+    title: "Software Services",
+    description: "Custom software solutions for businesses of all sizes",
+    icon: Code,
+  },
+  {
+    title: "Software Training",
+    description: "Full-stack development with modern technologies",
+    icon: Code,
   },
   {
     title: "Digital Marketing",
-    description: "Master digital marketing strategies and tools",
+    description: "Strategic marketing for the digital age",
+    icon: Brain,
   },
   {
-    title: "HR Management",
-    description: "Learn modern HR practices and strategies",
+    title: "Prefer Home Tuitions",
+    description: "Personalized learning experience at your convenience",
+    icon: Home,
   },
-];
+]
 
 export function Navigation() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [scrolling, setScrolling] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolling(true)
+      } else {
+        setScrolling(false)
+      }
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/70 shadow-md">
-      <div className="container mx-auto flex h-16 items-center px-6 lg:px-8">
-        <Link href="/" className="text-2xl font-bold text-primary">
+    <header
+      className={`fixed border top-0 z-50 w-full transition-all duration-300 ${
+        scrolling
+          ? "bg-white/80 backdrop-blur-lg shadow-md"
+          : "bg-transparent backdrop-blur-0"
+      }`}
+    >
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+        {/* Left side - Logo */}
+        <Link href="/" className="text-2xl font-bold text-blue-500">
           PreferCoding
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="ml-auto hidden md:flex items-center space-x-6">
-          <NavigationMenu>
-            <NavigationMenuList className="flex items-center space-x-4">
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-lg font-medium">Courses</NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-white shadow-lg rounded-lg w-[320px]">
-                  <ul className="grid gap-4 p-4">
-                    {courses.map((course) => (
-                      <li key={course.title}>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href="#"
-                            className="block p-3 rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground"
-                          >
-                            <div className="text-md font-semibold">{course.title}</div>
-                            <p className="text-sm text-muted-foreground">{course.description}</p>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link href="/about" className="text-lg font-medium hover:text-primary">
-                  About Us
-                </Link>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link href="/contact" className="text-lg font-medium hover:text-primary">
-                  Contact
-                </Link>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
+        {/* Right side - Navigation */}
+        <nav className="hidden md:flex items-center space-x-8">
+          {/* Services Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setIsServicesOpen(!isServicesOpen)}
+              className="text-base font-medium px-3 py-2 rounded-md hover:bg-blue-50 hover:text-blue-600 transition-colors inline-flex items-center gap-1"
+            >
+              Services
+              <svg
+                className={`ml-1 h-4 w-4 transition-transform ${isServicesOpen ? "rotate-180" : ""}`}
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+              </svg>
+            </button>
+
+            {isServicesOpen && (
+              <div className="absolute right-0 mt-2 w-[380px] bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 p-4">
+                <div className="grid gap-4">
+                  {services.map((service) => (
+                    <Link
+                      key={service.title}
+                      href="#"
+                      className="flex items-start gap-3 p-3 rounded-lg hover:bg-blue-50 transition-colors"
+                      onClick={() => setIsServicesOpen(false)}
+                    >
+                      <service.icon className="h-5 w-5 text-blue-500 mt-1 shrink-0" />
+                      <div>
+                        <div className="font-medium">{service.title}</div>
+                        <p className="text-sm text-gray-600 mt-1">{service.description}</p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <Link
+            href="/about"
+            className="text-base font-medium px-3 py-2 rounded-md hover:bg-blue-50 hover:text-blue-600 transition-colors"
+          >
+            About
+          </Link>
+          <Link
+            href="/contact"
+            className="text-base font-medium px-3 py-2 rounded-md hover:bg-blue-50 hover:text-blue-600 transition-colors"
+          >
+            Contact
+          </Link>
+          <Button variant="outline" className="font-medium border-blue-200 hover:bg-blue-50 hover:text-blue-600">
+            Login
+          </Button>
         </nav>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="ml-auto md:hidden p-2"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="absolute top-16 left-0 w-full bg-white shadow-md md:hidden">
-            <nav className="flex flex-col items-center space-y-4 py-4">
-              <Link href="/" className="text-lg font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>
-                Home
-              </Link>
-              <Link href="/about" className="text-lg font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>
-                About Us
-              </Link>
-              <Link href="/contact" className="text-lg font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>
-                Contact
-              </Link>
-              <div className="w-full border-t pt-4">
-                <Button variant="ghost" asChild>
-                  <Link href="/sign-in" onClick={() => setIsMobileMenuOpen(false)}>
-                    Sign In
+        {/* Mobile menu */}
+        <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+          <SheetTrigger asChild className="md:hidden">
+            <Button variant="outline" size="icon" className="h-9 w-9 border-none">
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Toggle menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="right" className="w-full max-w-xs">
+            <div className="flex flex-col h-full">
+              <nav className="flex-1 overflow-auto py-4">
+                <div className="flex flex-col space-y-1">
+                  <div className="px-4 py-2">
+                    <div className="text-sm font-medium text-gray-500 mb-2">Services</div>
+                    {services.map((service) => (
+                      <Link
+                        key={service.title}
+                        href="#"
+                        className="flex items-start gap-2 py-2 hover:text-blue-600"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <service.icon className="h-5 w-5 text-blue-500 mt-0.5" />
+                        <div>
+                          <div className="font-medium">{service.title}</div>
+                          <p className="text-sm text-gray-600">{service.description}</p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                  <Link
+                    href="/about"
+                    className="text-base font-medium py-2 px-4 hover:bg-blue-50 hover:text-blue-600"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    About
                   </Link>
-                </Button>
-                <Button className="px-6 py-2 text-lg" asChild>
-                  <Link href="/get-started" onClick={() => setIsMobileMenuOpen(false)}>
-                    Get Started
+                  <Link
+                    href="/contact"
+                    className="text-base font-medium py-2 px-4 hover:bg-blue-50 hover:text-blue-600"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Contact
                   </Link>
-                </Button>
+                </div>
+              </nav>
+              <div className="border-t pt-4 px-4">
+                <Button className="w-full bg-blue-500 hover:bg-blue-600">Login</Button>
               </div>
-            </nav>
-          </div>
-        )}
+            </div>
+          </SheetContent>
+        </Sheet>
       </div>
     </header>
-  );
+  )
 }
