@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { Menu, Code, Brain, Home } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { Menu, Code, Brain, Home } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const services = [
   {
@@ -27,24 +27,24 @@ const services = [
     description: "Personalized learning experience at your convenience",
     icon: Home,
   },
-]
+];
 
 export function Navigation() {
-  const [isServicesOpen, setIsServicesOpen] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [scrolling, setScrolling] = useState(false)
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolling, setScrolling] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
-        setScrolling(true)
+        setScrolling(true);
       } else {
-        setScrolling(false)
+        setScrolling(false);
       }
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <header
@@ -70,7 +70,9 @@ export function Navigation() {
             >
               Services
               <svg
-                className={`ml-1 h-4 w-4 transition-transform ${isServicesOpen ? "rotate-180" : ""}`}
+                className={`ml-1 h-4 w-4 transition-transform ${
+                  isServicesOpen ? "rotate-180" : ""
+                }`}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
@@ -86,14 +88,18 @@ export function Navigation() {
                     <Link
                       key={service.title}
                       href="/services/[slug]"
-                      as={`/services/${service.title.toLowerCase().replace(" ", "-")}`}
+                      as={`/services/${service.title
+                        .toLowerCase()
+                        .replace(" ", "-")}`}
                       className="flex items-start gap-3 p-3 rounded-lg hover:bg-blue-50 transition-colors"
                       onClick={() => setIsServicesOpen(false)}
                     >
                       <service.icon className="h-5 w-5 text-blue-500 mt-1 shrink-0" />
                       <div>
                         <div className="font-medium">{service.title}</div>
-                        <p className="text-sm text-gray-600 mt-1">{service.description}</p>
+                        <p className="text-sm text-gray-600 mt-1">
+                          {service.description}
+                        </p>
                       </div>
                     </Link>
                   ))}
@@ -114,15 +120,22 @@ export function Navigation() {
           >
             Contact
           </Link>
-          <Button variant="outline" className="font-medium border-blue-200 hover:bg-blue-50 hover:text-blue-600">
+          <Link
+            href="/login"
+            className="text-base font-medium px-3 py-2 border bg-blue-600 text-white rounded-md hover:bg-blue-50 hover:text-blue-600 transition-colors"
+          >
             Login
-          </Button>
+          </Link>
         </nav>
 
         {/* Mobile menu */}
         <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
           <SheetTrigger asChild className="md:hidden">
-            <Button variant="outline" size="icon" className="h-9 w-9 border-none">
+            <Button
+              variant="outline"
+              size="icon"
+              className="h-9 w-9 border-none"
+            >
               <Menu className="h-5 w-5" />
               <span className="sr-only">Toggle menu</span>
             </Button>
@@ -132,19 +145,24 @@ export function Navigation() {
               <nav className="flex-1 overflow-auto py-4">
                 <div className="flex flex-col space-y-1">
                   <div className="px-4 py-2">
-                    <div className="text-sm font-medium text-gray-500 mb-2">Services</div>
+                    <div className="text-sm font-medium text-gray-500 mb-2">
+                      Services
+                    </div>
                     {services.map((service) => (
                       <Link
-                      key={service.title}
-                      href={`/services/${service.title.toLowerCase().replace(/\s+/g, "-")}`}
-                      className="flex items-start gap-2 py-2 hover:text-blue-600"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                    
+                        key={service.title}
+                        href={`/services/${service.title
+                          .toLowerCase()
+                          .replace(/\s+/g, "-")}`}
+                        className="flex items-start gap-2 py-2 hover:text-blue-600"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
                         <service.icon className="h-5 w-5 text-blue-500 mt-0.5" />
                         <div>
                           <div className="font-medium">{service.title}</div>
-                          <p className="text-sm text-gray-600">{service.description}</p>
+                          <p className="text-sm text-gray-600">
+                            {service.description}
+                          </p>
                         </div>
                       </Link>
                     ))}
@@ -165,13 +183,19 @@ export function Navigation() {
                   </Link>
                 </div>
               </nav>
-              <div className="border-t pt-4 px-4">
-                <Button className="w-full bg-blue-500 hover:bg-blue-600">Login</Button>
+
+              <div className="border-t border bg-blue-600 text-white  pt-4 rounded px-4">
+                {/* <Button
+                  asChild
+                  className="w-full bg-blue-500 hover:bg-blue-600"
+                > */}
+                <Link href="/login">Login</Link>
+                {/* </Button> */}
               </div>
             </div>
           </SheetContent>
         </Sheet>
       </div>
     </header>
-  )
+  );
 }
