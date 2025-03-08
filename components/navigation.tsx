@@ -6,6 +6,7 @@ import { Menu, Code, Brain, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
+
 const services = [
   {
     title: "Software Services",
@@ -28,6 +29,8 @@ const services = [
     icon: Home,
   },
 ];
+
+
 
 export function Navigation() {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
