@@ -6,31 +6,36 @@ import { Menu, Code, Brain, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-
 const services = [
+  
   {
     title: "Software Services",
     description: "Custom software solutions for businesses of all sizes",
     icon: Code,
+    href: "/services/software-services",
   },
+
   {
     title: "Software Training",
     description: "Full-stack development with modern technologies",
     icon: Code,
+    href: "/services/software-training",
   },
+
   {
     title: "Digital Marketing",
     description: "Strategic marketing for the digital age",
     icon: Brain,
+    href: "/services/digital-marketing",
   },
+
   {
     title: "Prefer Home Tuitions",
     description: "Personalized learning experience at your convenience",
     icon: Home,
+    href: "/services/prefer-home-tuitions",
   },
 ];
-
-
 
 export function Navigation() {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
@@ -90,10 +95,7 @@ export function Navigation() {
                   {services.map((service) => (
                     <Link
                       key={service.title}
-                      href="/services/[slug]"
-                      as={`/services/${service.title
-                        .toLowerCase()
-                        .replace(" ", "-")}`}
+                      href={service.href}
                       className="flex items-start gap-3 p-3 rounded-lg hover:bg-blue-50 transition-colors"
                       onClick={() => setIsServicesOpen(false)}
                     >
@@ -154,16 +156,14 @@ export function Navigation() {
                     {services.map((service) => (
                       <Link
                         key={service.title}
-                        href={`/services/${service.title
-                          .toLowerCase()
-                          .replace(/\s+/g, "-")}`}
-                        className="flex items-start gap-2 py-2 hover:text-blue-600"
-                        onClick={() => setIsMobileMenuOpen(false)}
+                        href={service.href}
+                        className="flex items-start gap-3 p-3 rounded-lg hover:bg-blue-50 transition-colors"
+                        onClick={() => setIsServicesOpen(false)}
                       >
-                        <service.icon className="h-5 w-5 text-blue-500 mt-0.5" />
+                        <service.icon className="h-5 w-5 text-blue-500 mt-1 shrink-0" />
                         <div>
                           <div className="font-medium">{service.title}</div>
-                          <p className="text-sm text-gray-600">
+                          <p className="text-sm text-gray-600 mt-1">
                             {service.description}
                           </p>
                         </div>
