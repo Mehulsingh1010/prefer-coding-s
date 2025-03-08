@@ -1,4 +1,3 @@
-'use client'
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
@@ -6,10 +5,15 @@ import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import type React from "react"
 import { usePathname } from "next/navigation"
+import LayoutWrapper from "./LayoutWrapper"
 
 const inter = Inter({ subsets: ["latin"] })
 
-
+export const metadata: Metadata = {
+  title: "PreferCoding - Transform Your Future with Tech Excellence",
+  description: "Master web development, digital marketing, and HR skills with industry experts",
+  generator: 'v0.dev'
+}
 
 export default function RootLayout({
   children,
@@ -23,20 +27,5 @@ export default function RootLayout({
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
-  )
-}
-
-// Create a client component for conditional rendering
-
-function LayoutWrapper({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname()
-  const isAuthPage = pathname === "/login" || pathname.startsWith("/login/")
-  
-  return (
-    <>
-      {!isAuthPage && <Navigation />}
-      {children}
-      {!isAuthPage && <Footer />}
-    </>
   )
 }
