@@ -13,28 +13,24 @@ import {
   UserButton
 } from '@clerk/nextjs';
 const services = [
-  
   {
     title: "Software Services",
     description: "Custom software solutions for businesses of all sizes",
     icon: Code,
     href: "/services/software-services",
   },
-
   {
     title: "Software Training",
     description: "Full-stack development with modern technologies",
     icon: Code,
     href: "/services/software-training",
   },
-
   {
     title: "Digital Marketing",
     description: "Strategic marketing for the digital age",
     icon: Brain,
     href: "/services/digital-marketing",
   },
-
   {
     title: "Prefer Home Tuitions",
     description: "Personalized learning experience at your convenience",
@@ -202,14 +198,15 @@ export function Navigation() {
                 </div>
               </nav>
 
-              <div className="border-t border bg-blue-600 text-white  pt-4 rounded px-4">
-                {/* <Button
-                  asChild
-                  className="w-full bg-blue-500 hover:bg-blue-600"
-                > */}
-                <Link href="/login">Login</Link>
-                {/* </Button> */}
+              <SignedOut>
+              <div className="text-base font-medium px-3 py-2 border bg-blue-600 text-white rounded-md hover:bg-blue-50 hover:text-blue-600 transition-colors">
+              <SignInButton />
+
               </div>
+            </SignedOut>
+            <SignedIn>
+            <UserButton />
+            </SignedIn>
             </div>
           </SheetContent>
         </Sheet>
