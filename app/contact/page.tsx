@@ -72,13 +72,13 @@ export default function ContactUs() {
         <h3 className="text-2xl font-semibold text-blue-700 mb-4">Our Contact Details</h3>
         <div className="flex flex-col md:flex-row justify-center gap-4 md:gap-8">
           <div className="flex items-center justify-center gap-2 text-gray-700">
-            <Mail className="text-blue-500" /> info@prefercoding.com
+            <Mail className="text-blue-500" /> codingsecret15@gmail.com
           </div>
           <div className="flex items-center justify-center gap-2 text-gray-700">
-            <Phone className="text-blue-500" /> +123 456 7890
+            <Phone className="text-blue-500" /> +91 62638 73264
           </div>
           <div className="flex items-center justify-center gap-2 text-gray-700">
-            <MapPin className="text-blue-500" /> New York, USA
+            <MapPin className="text-blue-500" /> Sagar, MP
           </div>
         </div>
       </motion.div>

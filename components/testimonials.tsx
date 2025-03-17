@@ -8,29 +8,29 @@ import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
 
 const testimonials = [
   {
-    name: "Alex Thompson",
-    role: "Senior Software Engineer at TechGiant",
+    name: "Shravani kune",
+    role: "Software Engineer ",
     image: "/testimonials/alex.jpg",
     quote:
       "The Advanced Full Stack course completely transformed my career. I went from a junior developer to leading complex projects at a major tech company in just a year.",
   },
   {
-    name: "Sarah Chen",
-    role: "Digital Marketing Director at InnovateCorp",
+    name: "Mehul Singh",
+    role: "Software Engineer",
     image: "/testimonials/sarah.jpg",
     quote:
       "The AI-Powered Digital Marketing program revolutionized our marketing strategies. We've seen a 300% increase in conversion rates since implementing the techniques I learned.",
   },
   {
-    name: "Michael Rodriguez",
-    role: "Head of HR at FutureTech",
+    name: "Anand Raj",
+    role: "Software Engineer",
     image: "/testimonials/michael.jpg",
     quote:
       "The Next-Gen HR Management course provided invaluable insights into modernizing our HR practices. We've significantly improved employee satisfaction and retention.",
   },
   {
-    name: "Emily Zhao",
-    role: "Blockchain Developer at CryptoInnovate",
+    name: "Neetesh Prajapati",
+    role: "Software Engineer",
     image: "/testimonials/emily.jpg",
     quote:
       "Thanks to the Blockchain Development course, I was able to transition into this exciting field and now work on cutting-edge decentralized applications.",

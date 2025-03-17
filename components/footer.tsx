@@ -58,9 +58,10 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Contact</h3>
             <address className="text-sm text-gray-600 dark:text-gray-400 not-italic space-y-2">
-              <p>123 Training Center Lane</p>
-              <p>Tech Hub, City 12345</p>
-              <p>+1 (234) 567-890</p>
+              <p>16/592, Old, Makronia Rd</p>
+              <p>near ravidas mangal bhavan</p>
+              <p>Sagar, Madhya Pradesh 470004</p>
+              <p>+91 62638 73264</p>
               <p>info@prefercodingsecret.com</p>
             </address>
           </div>

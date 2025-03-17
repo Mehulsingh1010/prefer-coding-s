@@ -6,22 +6,22 @@ import { Users, BookOpen, Award, Briefcase } from "lucide-react"
 const stats = [
   {
     icon: Users,
-    title: "10,000+",
+    title: "1000+",
     description: "Students Enrolled",
   },
   {
     icon: BookOpen,
-    title: "50+",
+    title: "10+",
     description: "Expert-Led Courses",
   },
   {
     icon: Award,
-    title: "95%",
+    title: "100%",
     description: "Success Rate",
   },
   {
     icon: Briefcase,
-    title: "500+",
+    title: "5+",
     description: "Partner Companies",
   },
 ]

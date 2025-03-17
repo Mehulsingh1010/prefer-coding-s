@@ -49,9 +49,10 @@ const processSteps = [
   { title: "Launch & Support", description: "We deploy your solution and provide continuous support to ensure long-term success." },
 ]
 
+//insta link(wa)
 const testimonials = [
-  { name: "John Doe", feedback: "PreferCoding transformed our business with an amazing web app. Their expertise and dedication are unmatched!" },
-  { name: "Sarah Lee", feedback: "Highly professional and efficient. They built our mobile app exactly how we envisioned it!" },
+  { name: "Puneet Malva - EIT Global", feedback: "Secret codeweb privided outstanding web services that completed our IOT solutions pefectly. Thier expertise and professionalism greatly enhanced our online presence." },
+  { name: "Devendra Sahu - SD Craner Engineering", feedback: "Secret codeweb delievered a high-quality website with a great admin panel that exceeded our expectations. Thier Professionalism and technical skills were outstanding." },
 ]
 
 export default function SoftwareSolutions() {

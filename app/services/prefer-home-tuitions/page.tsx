@@ -13,8 +13,12 @@ const subjects = [
   "Computer Science",
   "English",
   "Biology",
-  "History & Geography",
-  "Coding (Python, Java, Web Development)",
+  "Java",
+  "Python",
+  "Web Development",
+  "App Development",
+  "C & C++",
+  "AI & ML"
 ]
 
 const plans = [
@@ -33,16 +37,16 @@ const methodology = [
 
 const tutors = [
   {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    phone: "+1 234 567 890",
-    linkedin: "https://linkedin.com/in/johndoe",
+    name: "Aakarsh Sahu",
+    email: "aakarsh08@gmail.com",
+    phone: "+91 62638 73264",
+    // linkedin: "https://www.linkedin.com/in/aakarsh-sahu/",
   },
   {
-    name: "Jane Smith",
-    email: "jane.smith@example.com",
-    phone: "+1 987 654 321",
-    linkedin: "https://linkedin.com/in/janesmith",
+    name: "Deepak Soni",
+    email: "codingsecret15@gmail.com",
+  
+    // linkedin: "https://linkedin.com/in/janesmith",
   },
 ]
 
@@ -143,8 +147,8 @@ export default function HomeTuition() {
                   <span className="text-gray-700">{tutor.phone}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Linkedin className="h-5 w-5 text-blue-500" />
-                  <Link href={tutor.linkedin} className="text-blue-600 underline">LinkedIn Profile</Link>
+                  {/* <Linkedin className="h-5 w-5 text-blue-500" /> */}
+                  {/* <Link href={tutor.linkedin} className="text-blue-600 underline">LinkedIn Profile</Link> */}
                 </div>
               </div>
             ))}

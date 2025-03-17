@@ -5,7 +5,13 @@ import Link from "next/link";
 import { Menu, Code, Brain, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs';
 const services = [
   
   {
@@ -119,18 +125,27 @@ export function Navigation() {
           >
             About
           </Link>
-          <Link
+            <Link
             href="/contact"
             className="text-base font-medium px-3 py-2 rounded-md hover:bg-blue-50 hover:text-blue-600 transition-colors"
-          >
+            >
             Contact
-          </Link>
-          <Link
+            </Link>
+            <SignedOut>
+              <div className="text-base font-medium px-3 py-2 border bg-blue-600 text-white rounded-md hover:bg-blue-50 hover:text-blue-600 transition-colors">
+              <SignInButton />
+
+              </div>
+            </SignedOut>
+            <SignedIn>
+            <UserButton />
+            </SignedIn>
+          {/* <Link
             href="/login"
             className="text-base font-medium px-3 py-2 border bg-blue-600 text-white rounded-md hover:bg-blue-50 hover:text-blue-600 transition-colors"
           >
             Login
-          </Link>
+          </Link> */}
         </nav>
 
         {/* Mobile menu */}

@@ -13,18 +13,18 @@ export default function AboutUs() {
 
   // Company stats
   const stats = [
-    { icon: <Users size={24} />, value: "50+", label: "Team Members" },
-    { icon: <Briefcase size={24} />, value: "200+", label: "Projects Completed" },
-    { icon: <BookOpen size={24} />, value: "1,500+", label: "People Trained" },
-    { icon: <Award size={24} />, value: "25+", label: "Awards Won" }
+    { icon: <Users size={24} />, value: "10+", label: "Team Members" },
+    { icon: <Briefcase size={24} />, value: "20+", label: "Projects Completed" },
+    { icon: <BookOpen size={24} />, value: "1,000+", label: "People Trained" },
+    { icon: <Award size={24} />, value: "5+", label: "Awards Won" }
   ];
 
   // Team members
   const teamMembers = [
-    { name: "Sarah Johnson", role: "Founder & CEO", image: "/api/placeholder/400/400" },
-    { name: "Michael Chen", role: "CTO", image: "/api/placeholder/400/400" },
-    { name: "Priya Sharma", role: "Head of Design", image: "/api/placeholder/400/400" },
-    { name: "David Wilson", role: "Lead Developer", image: "/api/placeholder/400/400" }
+    { name: "Eng. Akarsh Sahu", role: "Founder & CEO", image: "/api/placeholder/400/400" },
+    { name: "Shravani Kuna", role: "Co-Founder", image: "/api/placeholder/400/400" },
+    { name: "Kunal Kushwaha", role: "CTO", image: "/api/placeholder/400/400" },
+    { name: "Mehul Singh", role: "Lead Developer", image: "/api/placeholder/400/400" }
   ];
 
   return (
@@ -127,7 +127,7 @@ export default function AboutUs() {
                   <div className="bg-white p-6 rounded-lg shadow-md inline-block">
                     <div className="flex items-center md:justify-end gap-2 mb-2">
                       <History className="text-blue-500" />
-                      <h3 className="text-xl font-semibold text-blue-700">2015</h3>
+                      <h3 className="text-xl font-semibold text-blue-700">2024</h3>
                     </div>
                     <p className="text-gray-600">Founded as a small web development shop with 5 team members</p>
                   </div>
@@ -141,14 +141,14 @@ export default function AboutUs() {
                   <div className="bg-white p-6 rounded-lg shadow-md inline-block">
                     <div className="flex items-center gap-2 mb-2">
                       <History className="text-blue-500" />
-                      <h3 className="text-xl font-semibold text-blue-700">2017</h3>
+                      <h3 className="text-xl font-semibold text-blue-700">2025</h3>
                     </div>
                     <p className="text-gray-600">Expanded to 15 team members and opened our first office</p>
                   </div>
                 </div>
               </div>
               
-              <div className="flex flex-col md:flex-row">
+              {/* <div className="flex flex-col md:flex-row">
                 <div className="md:w-1/2 md:pr-12 md:text-right mb-4 md:mb-0">
                   <div className="bg-white p-6 rounded-lg shadow-md inline-block">
                     <div className="flex items-center md:justify-end gap-2 mb-2">
@@ -172,7 +172,7 @@ export default function AboutUs() {
                     <p className="text-gray-600">Reached 50+ team members and expanded globally</p>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </motion.div>
@@ -192,15 +192,15 @@ export default function AboutUs() {
                 <Award className="text-blue-500" />
               </div>
               <h3 className="text-xl font-semibold text-blue-700 mb-3">Top Development Agency</h3>
-              <p className="text-gray-600">Recognized as a top web development agency by TechReview for 3 consecutive years (2020-2022).</p>
+              <p className="text-gray-600">Recognized as a top web development agency by TechReview for 3 consecutive years (2024-2025).</p>
             </div>
             
             <div className="bg-white p-6 rounded-lg shadow-md">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
                 <Award className="text-blue-500" />
               </div>
-              <h3 className="text-xl font-semibold text-blue-700 mb-3">Innovation Award</h3>
-              <p className="text-gray-600">Received the Digital Innovation Award for our work in educational technology solutions in 2021.</p>
+              <h3 className="text-xl font-semibold text-blue-700 mb-3">Innovation Award 2024</h3>
+              <p className="text-gray-600">Received the Digital Innovation Award for our work in educational technology solutions in 2024.</p>
             </div>
             
             <div className="bg-white p-6 rounded-lg shadow-md">

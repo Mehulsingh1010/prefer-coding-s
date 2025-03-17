@@ -4,15 +4,20 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 
 const technologies = [
-  { name: "React", icon: "/tech/react.svg" },
-  { name: "Node.js", icon: "/tech/nodejs.svg" },
-  { name: "Python", icon: "/tech/python.svg" },
-  { name: "JavaScript", icon: "/tech/javascript.svg" },
-  { name: "TypeScript", icon: "/tech/typescript.svg" },
-  { name: "Docker", icon: "/tech/docker.svg" },
-  { name: "AWS", icon: "/tech/aws.svg" },
-  { name: "GraphQL", icon: "/tech/graphql.svg" },
+  { name: "React", icon: "/react.png" },
+  { name: "Node.js", icon: "/njs.png" },
+  { name: "Python", icon: "/python.jpeg" },
+  { name: "JavaScript", icon: "/js.png" },
+  { name: "TypeScript", icon: "/ts.png" },
+  { name: "Docker", icon: "/docker.webp" },
+  { name: "AWS", icon: "/aws.jpeg" },
+  { name: "GraphQL", icon: "/gql.jpg" },
 ]
+
+const zoomInVariants = {
+  initial: { scale: 1 },
+  whileHover: { scale: 1.2 },
+}
 
 export function TechStack() {
   return (
@@ -28,9 +33,20 @@ export function TechStack() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="flex flex-col items-center"
             >
-              <div className="bg-white p-4 rounded-full shadow-lg mb-4">
-                <Image src={tech.icon || "/placeholder.svg"} alt={tech.name} width={60} height={60} />
-              </div>
+              <motion.div 
+                className="mb-4"
+                variants={zoomInVariants}
+                initial="initial"
+                whileHover="whileHover"
+              >
+                <Image 
+                  src={tech.icon} 
+                  alt={tech.name} 
+                  width={60} 
+                  height={60} 
+                  unoptimized
+                />
+              </motion.div>
               <p className="text-lg font-semibold">{tech.name}</p>
             </motion.div>
           ))}
@@ -39,4 +55,3 @@ export function TechStack() {
     </section>
   )
 }
-
