@@ -12,6 +12,7 @@ import {
   SignedOut,
   UserButton
 } from '@clerk/nextjs';
+
 const services = [
   {
     title: "Software Services",
@@ -39,6 +40,10 @@ const services = [
   },
 ];
 
+
+
+
+
 export function Navigation() {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -46,11 +51,7 @@ export function Navigation() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolling(true);
-      } else {
-        setScrolling(false);
-      }
+      setScrolling(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -121,27 +122,20 @@ export function Navigation() {
           >
             About
           </Link>
-            <Link
+          <Link
             href="/contact"
             className="text-base font-medium px-3 py-2 rounded-md hover:bg-blue-50 hover:text-blue-600 transition-colors"
-            >
-            Contact
-            </Link>
-            <SignedOut>
-              <div className="text-base font-medium px-3 py-2 border bg-blue-600 text-white rounded-md hover:bg-blue-50 hover:text-blue-600 transition-colors">
-              <SignInButton />
-
-              </div>
-            </SignedOut>
-            <SignedIn>
-            <UserButton />
-            </SignedIn>
-          {/* <Link
-            href="/login"
-            className="text-base font-medium px-3 py-2 border bg-blue-600 text-white rounded-md hover:bg-blue-50 hover:text-blue-600 transition-colors"
           >
-            Login
-          </Link> */}
+            Contact
+          </Link>
+          <SignedOut>
+            <div className="text-base font-medium px-3 py-2 border bg-blue-600 text-white rounded-md hover:bg-blue-50 hover:text-blue-600 transition-colors">
+              <SignInButton />
+            </div>
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </nav>
 
         {/* Mobile menu */}
@@ -169,7 +163,10 @@ export function Navigation() {
                         key={service.title}
                         href={service.href}
                         className="flex items-start gap-3 p-3 rounded-lg hover:bg-blue-50 transition-colors"
-                        onClick={() => setIsServicesOpen(false)}
+                        onClick={() => {
+                          setIsServicesOpen(false);
+                          setIsMobileMenuOpen(false);
+                        }}
                       >
                         <service.icon className="h-5 w-5 text-blue-500 mt-1 shrink-0" />
                         <div>
@@ -199,14 +196,13 @@ export function Navigation() {
               </nav>
 
               <SignedOut>
-              <div className="text-base font-medium px-3 py-2 border bg-blue-600 text-white rounded-md hover:bg-blue-50 hover:text-blue-600 transition-colors">
-              <SignInButton />
-
-              </div>
-            </SignedOut>
-            <SignedIn>
-            <UserButton />
-            </SignedIn>
+                <div className="text-base font-medium px-3 py-2 border bg-blue-600 text-white rounded-md hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                  <SignInButton />
+                </div>
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
             </div>
           </SheetContent>
         </Sheet>
