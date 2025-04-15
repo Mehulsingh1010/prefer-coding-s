@@ -21,10 +21,10 @@ export default function AboutUs() {
 
   // Team members
   const teamMembers = [
-    { name: "Eng. Akarsh Sahu", role: "Founder & CEO", image: "/api/placeholder/400/400" },
-    { name: "Shravani Kuna", role: "Co-Founder", image: "/api/placeholder/400/400" },
-    { name: "Kunal Kushwaha", role: "CTO", image: "/api/placeholder/400/400" },
-    { name: "Mehul Singh", role: "Lead Developer", image: "/api/placeholder/400/400" }
+    { name: "Eng. Akarsh Sahu", role: "Founder & CEO", image: "/user.png" },
+    { name: "Shravani Kuna", role: "Co-Founder", image: "/user.png" },
+    { name: "Yashika Kumari", role: "CTO", image: "/user.png" },
+    { name: "Mehul Singh", role: "Lead Developer", image: "/user.png" }
   ];
 
   return (

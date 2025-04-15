@@ -62,7 +62,7 @@ export function Footer() {
               <p>near ravidas mangal bhavan</p>
               <p>Sagar, Madhya Pradesh 470004</p>
               <p>+91 62638 73264</p>
-              <p>codingsecret15@gmail.com</p>
+              <p>info@prefercodingsecret.com</p>
             </address>
           </div>
         </div>

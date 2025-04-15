@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Menu, Code, Brain, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -40,22 +40,47 @@ const services = [
   },
 ];
 
-
-
-
-
 export function Navigation() {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolling, setScrolling] = useState(false);
+  const servicesDropdownRef = useRef(null);
+  
+const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolling(window.scrollY > 50);
+      setIsServicesOpen(false);
     };
+    
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      // Clear any remaining timeout when unmounting
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
   }, []);
+
+  // Add a small delay before closing the dropdown to allow users to move to the dropdown content
+  const handleMouseLeave = () => {
+    timerRef.current = setTimeout(() => {
+      setIsServicesOpen(false);
+    }, 100);
+  };
+  
+  
+  const handleMouseEnter = () => {
+    // Clear any existing timeout to prevent the dropdown from closing
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+    setIsServicesOpen(true);
+  };
 
   return (
     <header
@@ -74,9 +99,13 @@ export function Navigation() {
         {/* Right side - Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           {/* Services Dropdown */}
-          <div className="relative">
+          <div 
+            className="relative" 
+            ref={servicesDropdownRef}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
             <button
-              onClick={() => setIsServicesOpen(!isServicesOpen)}
               className="text-base font-medium px-3 py-2 rounded-md hover:bg-blue-50 hover:text-blue-600 transition-colors inline-flex items-center gap-1"
             >
               Services
@@ -93,14 +122,17 @@ export function Navigation() {
             </button>
 
             {isServicesOpen && (
-              <div className="absolute right-0 mt-2 w-[380px] bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 p-4">
+              <div 
+                className="absolute right-0 mt-2 w-96 bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 p-4"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
                 <div className="grid gap-4">
                   {services.map((service) => (
                     <Link
                       key={service.title}
                       href={service.href}
                       className="flex items-start gap-3 p-3 rounded-lg hover:bg-blue-50 transition-colors"
-                      onClick={() => setIsServicesOpen(false)}
                     >
                       <service.icon className="h-5 w-5 text-blue-500 mt-1 shrink-0" />
                       <div>
@@ -164,7 +196,6 @@ export function Navigation() {
                         href={service.href}
                         className="flex items-start gap-3 p-3 rounded-lg hover:bg-blue-50 transition-colors"
                         onClick={() => {
-                          setIsServicesOpen(false);
                           setIsMobileMenuOpen(false);
                         }}
                       >
