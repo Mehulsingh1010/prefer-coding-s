@@ -344,7 +344,7 @@ export default function DigitalMarketing() {
                   Schedule a Free Consultation
                 </Button>
               </Link>
-              <Link href="/">
+              <Link href="/services">
                 <Button variant="outline" className="bg-transparent border-white text-white hover:bg-white/10 px-6 py-3 text-lg rounded-lg">
                   Browse All Services
                 </Button>

@@ -84,11 +84,7 @@ const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   return (
     <header
-      className={`fixed border top-0 z-50 w-full transition-all duration-300 ${
-        scrolling
-          ? "bg-white/80 backdrop-blur-lg shadow-md"
-          : "bg-transparent backdrop-blur-0"
-      }`}
+      className={`fixed border top-0 z-50 w-full transition-all duration-300 border-blue-500 bg-slate-50`}
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Left side - Logo */}
