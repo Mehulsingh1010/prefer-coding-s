@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, Code, Brain, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -11,7 +12,7 @@ import {
   SignedIn,
   SignedOut,
   UserButton
-} from '@clerk/nextjs';
+} from "@clerk/nextjs";
 
 const services = [
   {
@@ -45,36 +46,29 @@ export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolling, setScrolling] = useState(false);
   const servicesDropdownRef = useRef(null);
-  
-const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pathname = usePathname();
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolling(window.scrollY > 50);
       setIsServicesOpen(false);
     };
-    
+
     window.addEventListener("scroll", handleScroll);
-    
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      // Clear any remaining timeout when unmounting
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-      }
+      if (timerRef.current) clearTimeout(timerRef.current);
     };
   }, []);
 
-  // Add a small delay before closing the dropdown to allow users to move to the dropdown content
   const handleMouseLeave = () => {
     timerRef.current = setTimeout(() => {
       setIsServicesOpen(false);
     }, 100);
   };
-  
-  
+
   const handleMouseEnter = () => {
-    // Clear any existing timeout to prevent the dropdown from closing
     if (timerRef.current) {
       clearTimeout(timerRef.current);
       timerRef.current = null;
@@ -82,33 +76,40 @@ const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     setIsServicesOpen(true);
   };
 
+  const isServicesActive = pathname.startsWith("/services");
+
   return (
-    <header
-      className={`fixed border top-0 z-50 w-full transition-all duration-300 border-blue-500 bg-slate-50`}
-    >
+    <header className={`fixed border top-0 z-50 w-full transition-all duration-300 border-blue-500 bg-slate-50`}>
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Left side - Logo */}
         <Link href="/" className="text-2xl font-bold text-blue-500">
           PreferCoding
         </Link>
 
-        {/* Right side - Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
+          <Link
+            href="/portfolio"
+            className={`text-base font-medium px-3 py-2 rounded-md transition-colors ${
+              pathname === "/portfolio" ? "bg-blue-100 text-blue-700" : "hover:bg-blue-50 hover:text-blue-600"
+            }`}
+          >
+            Work portfolio
+          </Link>
+
           {/* Services Dropdown */}
-          <div 
-            className="relative" 
+          <div
+            className="relative"
             ref={servicesDropdownRef}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
             <button
-              className="text-base font-medium px-3 py-2 rounded-md hover:bg-blue-50 hover:text-blue-600 transition-colors inline-flex items-center gap-1"
+              className={`text-base font-medium px-3 py-2 rounded-md inline-flex items-center gap-1 transition-colors ${
+                isServicesActive ? "bg-blue-100 text-blue-700" : "hover:bg-blue-50 hover:text-blue-600"
+              }`}
             >
               Services
               <svg
-                className={`ml-1 h-4 w-4 transition-transform ${
-                  isServicesOpen ? "rotate-180" : ""
-                }`}
+                className={`ml-1 h-4 w-4 transition-transform ${isServicesOpen ? "rotate-180" : ""}`}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
@@ -118,7 +119,7 @@ const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
             </button>
 
             {isServicesOpen && (
-              <div 
+              <div
                 className="absolute right-0 mt-2 w-96 bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 p-4"
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
@@ -128,14 +129,16 @@ const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
                     <Link
                       key={service.title}
                       href={service.href}
-                      className="flex items-start gap-3 p-3 rounded-lg hover:bg-blue-50 transition-colors"
+                      className={`flex items-start gap-3 p-3 rounded-lg transition-colors ${
+                        pathname === service.href
+                          ? "bg-blue-100 text-blue-700"
+                          : "hover:bg-blue-50 text-gray-800"
+                      }`}
                     >
                       <service.icon className="h-5 w-5 text-blue-500 mt-1 shrink-0" />
                       <div>
                         <div className="font-medium">{service.title}</div>
-                        <p className="text-sm text-gray-600 mt-1">
-                          {service.description}
-                        </p>
+                        <p className="text-sm text-gray-600 mt-1">{service.description}</p>
                       </div>
                     </Link>
                   ))}
@@ -146,16 +149,22 @@ const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
           <Link
             href="/about"
-            className="text-base font-medium px-3 py-2 rounded-md hover:bg-blue-50 hover:text-blue-600 transition-colors"
+            className={`text-base font-medium px-3 py-2 rounded-md transition-colors ${
+              pathname === "/about" ? "bg-blue-100 text-blue-700" : "hover:bg-blue-50 hover:text-blue-600"
+            }`}
           >
             About
           </Link>
+
           <Link
             href="/contact"
-            className="text-base font-medium px-3 py-2 rounded-md hover:bg-blue-50 hover:text-blue-600 transition-colors"
+            className={`text-base font-medium px-3 py-2 rounded-md transition-colors ${
+              pathname === "/contact" ? "bg-blue-100 text-blue-700" : "hover:bg-blue-50 hover:text-blue-600"
+            }`}
           >
             Contact
           </Link>
+
           <SignedOut>
             <div className="text-base font-medium px-3 py-2 border bg-blue-600 text-white rounded-md hover:bg-blue-50 hover:text-blue-600 transition-colors">
               <SignInButton />
@@ -166,14 +175,10 @@ const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
           </SignedIn>
         </nav>
 
-        {/* Mobile menu */}
+        {/* Mobile Menu */}
         <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
           <SheetTrigger asChild className="md:hidden">
-            <Button
-              variant="outline"
-              size="icon"
-              className="h-9 w-9 border-none"
-            >
+            <Button variant="outline" size="icon" className="h-9 w-9 border-none">
               <Menu className="h-5 w-5" />
               <span className="sr-only">Toggle menu</span>
             </Button>
@@ -183,38 +188,40 @@ const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
               <nav className="flex-1 overflow-auto py-4">
                 <div className="flex flex-col space-y-1">
                   <div className="px-4 py-2">
-                    <div className="text-sm font-medium text-gray-500 mb-2">
-                      Services
-                    </div>
+                    <div className="text-sm font-medium text-gray-500 mb-2">Services</div>
                     {services.map((service) => (
                       <Link
                         key={service.title}
                         href={service.href}
-                        className="flex items-start gap-3 p-3 rounded-lg hover:bg-blue-50 transition-colors"
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                        }}
+                        className={`flex items-start gap-3 p-3 rounded-lg transition-colors ${
+                          pathname === service.href
+                            ? "bg-blue-100 text-blue-700"
+                            : "hover:bg-blue-50 text-gray-800"
+                        }`}
+                        onClick={() => setIsMobileMenuOpen(false)}
                       >
                         <service.icon className="h-5 w-5 text-blue-500 mt-1 shrink-0" />
                         <div>
                           <div className="font-medium">{service.title}</div>
-                          <p className="text-sm text-gray-600 mt-1">
-                            {service.description}
-                          </p>
+                          <p className="text-sm text-gray-600 mt-1">{service.description}</p>
                         </div>
                       </Link>
                     ))}
                   </div>
                   <Link
                     href="/about"
-                    className="text-base font-medium py-2 px-4 hover:bg-blue-50 hover:text-blue-600"
+                    className={`text-base font-medium py-2 px-4 rounded-md transition-colors ${
+                      pathname === "/about" ? "bg-blue-100 text-blue-700" : "hover:bg-blue-50 hover:text-blue-600"
+                    }`}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     About
                   </Link>
                   <Link
                     href="/contact"
-                    className="text-base font-medium py-2 px-4 hover:bg-blue-50 hover:text-blue-600"
+                    className={`text-base font-medium py-2 px-4 rounded-md transition-colors ${
+                      pathname === "/contact" ? "bg-blue-100 text-blue-700" : "hover:bg-blue-50 hover:text-blue-600"
+                    }`}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Contact
